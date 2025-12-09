@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 
 export function useAutocomplete(place: string| null) {
-    const [autocompletelist, setList] = useState<{city: string, state:string}[]>([]);{
+    const [autocompletelist, setList] = useState<{city: string}[]>([]);{
         useEffect(() => {
             if(place && place != " ")
             fetch("https://api.geoapify.com/v1/geocode/autocomplete?text=" + place + "&type=city&limit=10&filter=countrycode%3Aus&format=json&apiKey=b8568cb9afc64fad861a69edbddb2658\n")

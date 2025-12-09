@@ -33,7 +33,7 @@ function App() {
                   )}
                   <button onClick={() => {
 
-                  }}>Search</button>
+                  }}>Serch</button>
               </div>
           </div>
 
