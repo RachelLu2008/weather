@@ -9,8 +9,8 @@ function App() {
   const [currStr, setCurrStr] = useState<string>('')
     const [currPlace,setCurrPlace] = useState<string>('')
   const autocomplete = useAutocomplete(currStr);
-  const city = usePlaces(currPlace);
-  const  coords = useWeatherLoc(city? city.lon : 0 ,city? city.lat: 0)
+  const coords = usePlaces(currPlace);
+  const  weather = useWeatherLoc(coords? coords.lon : 0 ,coords? coords.lat: 0)
 
 
 
@@ -25,19 +25,22 @@ function App() {
                       <div key={index}>
                           <ul>
                               <button onClick={() => {
-                                  setCurrPlace(auto.city)
-                                  setCurrStr(auto.city);
-                              }}>{auto.city}</button>
+                                  setCurrPlace(auto.formatted)
+                                  setCurrStr(auto.formatted);
+                              }}>{auto.formatted}</button>
                           </ul>
                       </div>
                   )}
                   <button onClick={() => {
-
-                  }}>Serch</button>
+                      setCurrPlace(currStr)
+                  }}>Search</button>
               </div>
           </div>
-
+          <div>
+              {}
+          </div>
       </>
+
   )
 }
 
