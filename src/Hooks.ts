@@ -31,54 +31,66 @@ export function usePlaces(city: string|null){
     }, [city]);
     return places;
 }
+
+export type weather= {
+    lon:number;
+    lat:number;
+    generationtime_ms : number;
+    utc_offset_seconds:number;
+    timezone: string;
+    elevation: number;
+    daily:daily;
+    current:current
+    hourly:hourly
+}
+
+type current={
+        time: string;
+        interval: number;
+        temperature_2m: number;
+        relative_humidity_2m: number;
+        apparent_temperature: number;
+        is_day: boolean;
+        wind_speed_10m: number;
+        wind_direction_10m: number;
+        wind_gusts_10m: number;
+        precipitation: number;
+        weather_code: number;
+}
+
+type hourly={
+        time:string[];
+        temperature_2m: number[];
+        relative_humidity_2m: number[];
+        dew_point_2m: number[];
+        apparent_temperature: number[];
+        precipitation_probability: number[];
+        visibility:number[];
+        wind_speed_10m: number[];
+        wind_direction_10m: number[];
+        wind_gusts_10m: number[];
+        precipitation: number[];
+        uv_index: number[];
+        is_day: boolean[];
+}
+
+type daily={
+        time:string[];
+        weather_code:number[];
+        temperature_2m_min:number[];
+        temperature_2m_max:number[];
+        sunrise:string[];
+        uv_index_max:number[];
+        precipitation_sum:number[];
+        precipitation_hours:number[];
+        precipitation_probability_max: number[];
+        apparent_temperature_max: number[];
+        apparent_temperature_min: number[];
+        wind_speed_10m_max: number[];
+        wind_gusts_10m_max: number[];
+}
 export function useWeatherLoc(long: number|null, lat:number|null){
-    const [coords,setCoords]= useState<{
-        lon:number;
-        lat:number;
-        generationtime_ms:number;
-        utc_offset_seconds: number;
-        timezone: string;
-        timezone_abbreviation: string;
-        elevation:number
-        currents_units: {
-            time:string;
-            interval: string;
-            temperature_2m: string;
-            relative_humidity_2m: string;
-            apparent_temperature: string;
-            is_day: boolean
-            wind_speed_10m: string,
-            wind_direction_10m: string,
-            wind_gusts_10m: string,
-            precipitation: string,
-            weather_code: string;
-        };
-        current:{
-            time:string;
-            interval: string;
-            temperature_2m: string;
-            relative_humidity_2m: string;
-            apparent_temperature: string;
-            is_day: boolean
-            wind_speed_10m: string,
-            wind_direction_10m: string,
-            wind_gusts_10m: string,
-            precipitation: string,
-            weather_code: string;
-        };
-        hourly_units:{
-            time:string;
-            temperature_2m: string;
-            relative_humidity_2m: string;
-            apparent_temperature: string;
-            is_day: boolean
-            wind_speed_10m: string,
-            wind_direction_10m: string,
-            wind_gusts_10m: string,
-            precipitation: string,
-            weather_code: string;
-        }
-    }[]>([]);
+    const [coords,setCoords]= useState<weather| null>();
     useEffect(() => {
         if((lat|| lat ==0)&&(long || long ==0))
         fetch("https://api.open-meteo.com/v1/forecast?latitude="+ lat + "&longitude="+ long + "&daily=weather_code,temperature_2m_min,temperature_2m_max,sunrise,sunset,uv_index_max,precipitation_sum,precipitation_hours,precipitation_probability_max,apparent_temperature_max,apparent_temperature_min,wind_speed_10m_max,wind_gusts_10m_max&hourly=temperature_2m,relative_humidity_2m,dew_point_2m,apparent_temperature,precipitation_probability,weather_code,visibility,wind_speed_10m,wind_direction_10m,wind_gusts_10m,precipitation,uv_index,is_day&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,wind_speed_10m,wind_direction_10m,wind_gusts_10m,precipitation,weather_code&timezone=auto&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch")
