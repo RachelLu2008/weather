@@ -57,14 +57,13 @@ function App() {
                           {weather.hourly.uv_index[index]},
                           {weather.hourly.is_day[index]}
                       </div>
-
+</div>
 
 
                   )}
                       <div> {weather.hourly.time.map((_item, index) =>
                           <div key={index}>
-                              {weather.timezone[index]}
-                              {weather.generationtime_ms[index]}
+
                               {weather.utc_offset_seconds}
                               {weather.timezone}
                               {weather.elevation}
@@ -83,7 +82,8 @@ function App() {
                       )}
 
                       </div>
-
+                   <div>   {weather.timezone}</div>
+                      <div>   {weather.generationtime_ms}</div>
                       <div>{weather.current.time}</div>
                       <div>{weather.current.interval}</div>
                       <div>{weather.current.temperature_2m}</div>
@@ -95,7 +95,7 @@ function App() {
                       <div>{weather.current.wind_gusts_10m}</div>
                       <div>{weather.current.precipitation}</div>
                       <div>{weather.current.weather_code}</div>
-                  </div>
+                  </div>)
                   }
 
               </div>
