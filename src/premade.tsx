@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Input = ({currStr, setCurrStr}:) => {
+const Input = ({currStr, setCurrStr}) => {
     return (
         <StyledWrapper>
             <div className="container">
