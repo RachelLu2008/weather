@@ -3,6 +3,7 @@ import { useState } from 'react'
 // import viteLogo from '/vite.svg'
 import './App.css'
 import {useAutocomplete, usePlaces, useWeatherLoc} from "./Hooks.ts";
+import Input from "./premade.tsx";
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
           <div>
               <label>
                   <input value={currStr} onChange={e => setCurrStr(e.target.value)}/>
+                  <Input  value={currStr} onChange={e => setCurrStr(e.target.value)}/>
               </label>
               <div>
                   {autocomplete.map((auto, index) =>
@@ -56,17 +58,13 @@ function App() {
                           {weather.hourly.precipitation[index]},
                           {weather.hourly.uv_index[index]},
                           {weather.hourly.is_day[index]}
-                      </div>
+                      </div>)}
 </div>
 
 
-                  )}
-                      <div> {weather.hourly.time.map((_item, index) =>
-                          <div key={index}>
 
-                              {weather.utc_offset_seconds}
-                              {weather.timezone}
-                              {weather.elevation}
+                      <div> {weather.daily.time.map((_item, index) =>
+                          <div key={index}>
                               {weather.daily.time}
                               {weather.daily.temperature_2m_min}
                               {weather.daily.temperature_2m_max}
@@ -82,8 +80,11 @@ function App() {
                       )}
 
                       </div>
-                   <div>   {weather.timezone}</div>
-                      <div>   {weather.generationtime_ms}</div>
+                      <div>{weather.timezone}</div>
+                      <div>{weather.generationtime_ms}</div>
+                      <div>{weather.utc_offset_seconds}</div>
+                      <div>{weather.timezone}</div>
+                      <div>{weather.elevation}</div>
                       <div>{weather.current.time}</div>
                       <div>{weather.current.interval}</div>
                       <div>{weather.current.temperature_2m}</div>
@@ -95,8 +96,7 @@ function App() {
                       <div>{weather.current.wind_gusts_10m}</div>
                       <div>{weather.current.precipitation}</div>
                       <div>{weather.current.weather_code}</div>
-                  </div>)
-                  }
+                  </div>}
 
               </div>
                   </>
