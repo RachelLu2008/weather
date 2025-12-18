@@ -4,6 +4,7 @@ import { useState } from 'react'
 import './App.css'
 import {useAutocomplete, usePlaces, useWeatherLoc} from "./Hooks.ts";
 import Input from "./premade.tsx";
+import Card from "./weatherCard.tsx";
 
 function App() {
 
@@ -13,14 +14,16 @@ function App() {
   const coords = usePlaces(currPlace);
   const  weather = useWeatherLoc(coords? coords.lon : 0 ,coords? coords.lat: 0)
 
-
+    const handleSearch = () => {
+        if (!currStr.trim()) return;
+        setCurrPlace(currStr);
+    };
 //hu
   return (
       <>
           <div>
               <label>
-                  <input value={currStr} onChange={e => setCurrStr(e.target.value)}/>
-                  <Input  value={currStr} onChange={e => setCurrStr(e.target.value)}/>
+                  <Input  value={currStr} onChange={e => setCurrStr(e.target.value)} onSearch={handleSearch}/>
               </label>
               <div>
                   {autocomplete.map((auto, index) =>
@@ -33,17 +36,18 @@ function App() {
                           </ul>
                       </div>
                   )}
-                  <button onClick={() => {
-                      setCurrPlace(currStr)
-                  }}>Search
-                  </button>
+                  {/*<button onClick={() => {*/}
+                  {/*    setCurrPlace(currStr)*/}
+                  {/*}}>Search*/}
+                  {/*</button>*/}
               </div>
           </div>
 
 
 
           <div>
-              {weather && <div>
+              {weather &&
+                  <div>
                   <div> {weather.hourly.time.map((_item, index) =>
                       <div key={index}>
                           {weather.hourly.time[index]},
