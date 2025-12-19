@@ -5,7 +5,6 @@ import './App.css'
 import {useAutocomplete, usePlaces, useWeatherLoc} from "./Hooks.ts";
 import Input from "./premade.tsx";
 import Card from "./weatherCard.tsx";
-
 function App() {
 
   const [currStr, setCurrStr] = useState<string>('')
@@ -103,6 +102,7 @@ function App() {
                   </div>}
 
               </div>
+          {weather && <Card weather={weather} currPlace={currPlace}/>}
                   </>
 
                   )

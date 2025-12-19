@@ -1,7 +1,38 @@
-import React from 'react';
+// import React from 'react';
 import styled from 'styled-components';
+import type {weather} from "./Hooks.ts";
 
-const Card = () => {
+function weatherCode(code: number){
+    if(code == 0){
+        return "Sunny"
+    }
+    else if(code >0 && code<= 19){
+        return "Cloudy"
+    }
+    else if(code > 20 && code <= 29){
+        return "Rain";
+    }
+    else if(code > 30 && code <= 39){
+        return "Dust Storm";
+    }
+    else if(code > 40 && code <= 49){
+        return "Fog";
+    }
+    else if(code > 50 && code <= 59){
+        return "Drizzle";
+    }
+    else if(code > 60 && code <= 69){
+        return "Rain";
+    }
+    else if(code > 70 && code <= 79){
+        return "Snow";
+    }
+}
+const Card = ({weather, currPlace}:{weather: weather, currPlace:string}) => {
+    const options:{hour:"numeric", minute:"numeric"} = {
+        hour: "numeric",
+        minute: "numeric",
+    }
     return (
         <StyledWrapper>
             <div className="card">
@@ -28,7 +59,7 @@ const Card = () => {
                     <div className="hill-3" />
                     <div className="hill-4" />
                     <div className="tree-1">
-                        <svg version={1.0} id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" xmlSpace="preserve" fill="#47567F">
+                        <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" xmlSpace="preserve" fill="#47567F">
                             <g id="SVGRepo_bgCarrier" strokeWidth={0} />
                             <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
                             <g id="SVGRepo_iconCarrier">
@@ -37,7 +68,7 @@ const Card = () => {
                         </svg>
                     </div>
                     <div className="tree-2">
-                        <svg version={1.0} id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" xmlSpace="preserve" fill="#47567F">
+                        <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" xmlSpace="preserve" fill="#47567F">
                             <g id="SVGRepo_bgCarrier" strokeWidth={0} />
                             <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
                             <g id="SVGRepo_iconCarrier">
@@ -46,7 +77,7 @@ const Card = () => {
                         </svg>
                     </div>
                     <div className="tree-3">
-                        <svg version={1.0} id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="-0.64 -0.64 65.28 65.28" xmlSpace="preserve" fill="#4A4973" stroke="#4A4973">
+                        <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="-0.64 -0.64 65.28 65.28" xmlSpace="preserve" fill="#4A4973" stroke="#4A4973">
                             <g id="SVGRepo_bgCarrier" strokeWidth={0} />
                             <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
                             <g id="SVGRepo_iconCarrier">
@@ -68,39 +99,47 @@ const Card = () => {
                                     </g>
                                 </svg>
                             </div>
-                            <p>Cloudy</p>
+                            <p>{weatherCode(weather.current.weather_code)}</p>
                         </div>
+
                         <div className="right-side">
                             <div className="location">
                                 <div>
-                                    <svg version={1.0} id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="64px" height="64px" viewBox="0 0 64 64" xmlSpace="preserve" fill="#ffffff" stroke="#ffffff">
-                                        <g id="SVGRepo_bgCarrier" strokeWidth={0} />
-                                        <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
+                                    <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                         xmlnsXlink="http://www.w3.org/1999/xlink" width="64px" height="64px"
+                                         viewBox="0 0 64 64" xmlSpace="preserve" fill="#ffffff" stroke="#ffffff">
+                                        <g id="SVGRepo_bgCarrier" strokeWidth={0}/>
+                                        <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"/>
                                         <g id="SVGRepo_iconCarrier">
-                                            <path fill="#ffffff" d="M32,0C18.746,0,8,10.746,8,24c0,5.219,1.711,10.008,4.555,13.93c0.051,0.094,0.059,0.199,0.117,0.289l16,24 C29.414,63.332,30.664,64,32,64s2.586-0.668,3.328-1.781l16-24c0.059-0.09,0.066-0.195,0.117-0.289C54.289,34.008,56,29.219,56,24 C56,10.746,45.254,0,32,0z M32,32c-4.418,0-8-3.582-8-8s3.582-8,8-8s8,3.582,8,8S36.418,32,32,32z" />
+                                            <path fill="#ffffff"
+                                                  d="M32,0C18.746,0,8,10.746,8,24c0,5.219,1.711,10.008,4.555,13.93c0.051,0.094,0.059,0.199,0.117,0.289l16,24 C29.414,63.332,30.664,64,32,64s2.586-0.668,3.328-1.781l16-24c0.059-0.09,0.066-0.195,0.117-0.289C54.289,34.008,56,29.219,56,24 C56,10.746,45.254,0,32,0z M32,32c-4.418,0-8-3.582-8-8s3.582-8,8-8s8,3.582,8,8S36.418,32,32,32z"/>
                                         </g>
                                     </svg>
-                                    <span>Spain</span>
+                                    <span>{currPlace}</span>
+                                    <div>{weather.timezone}</div>
                                 </div>
                             </div>
-                            <p>Monday, 4th May</p>
-                            <p className="temperature">24°C</p>
+                            <p>{weather.daily.time[0]}</p>
+                            <p className="temperature">{weather.current.temperature_2m}°F</p>
                         </div>
                     </div>
                     <div className="forecast">
                         <div>
-                            <p>Tuesday, 5th May</p>
-                            <p>24°C</p>
+                            <p>{weather.daily.time[1]}</p>
+                            <p>{weather.daily.temperature_2m_max[1]}°F</p>
+                            <p>{weatherCode(weather.daily.weather_code[0])}</p>
                         </div>
                         <div className="separator" />
                         <div>
-                            <p>Wednesday, 6th May</p>
-                            <p>26°C</p>
+                            <p>{weather.daily.time[2]}</p>
+                            <p>{weather.daily.temperature_2m_max[2]}°F</p>
+                            <p>{weatherCode(weather.daily.weather_code[1])}</p>
                         </div>
-                        <div className="separator" />
+                        <div className="separator"/>
                         <div>
-                            <p>Thursday, 7th May</p>
-                            <p>22°C</p>
+                            <p>{weather.daily.time[3]}</p>
+                            <p>{weather.daily.temperature_2m_max[3]}°F</p>
+                            <p>{weatherCode(weather.daily.weather_code[2])}</p>
                         </div>
                     </div>
                 </section>
@@ -111,12 +150,14 @@ const Card = () => {
 
 const StyledWrapper = styled.div`
   .card {
+      margin-left: auto;
+      margin-right: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
-    width: 220px;
-    height: 350px;
+    width: 1000px;
+    height: 500px;
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 12px 12px 0px rgba(0, 0, 0, 0.1);
