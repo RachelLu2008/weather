@@ -44,64 +44,64 @@ function App() {
 
 
 
-          <div>
-              {weather &&
-                  <div>
-                  <div> {weather.hourly.time.map((_item, index) =>
-                      <div key={index}>
-                          {weather.hourly.time[index]},
-                          {weather.hourly.temperature_2m[index]},
-                          {weather.hourly.relative_humidity_2m[index]},
-                          {weather.hourly.dew_point_2m[index]},
-                          {weather.hourly.apparent_temperature[index]},
-                          {weather.hourly.precipitation_probability[index]},
-                          {weather.hourly.wind_speed_10m[index]},
-                          {weather.hourly.wind_direction_10m[index]},
-                          {weather.hourly.wind_gusts_10m[index]},
-                          {weather.hourly.precipitation[index]},
-                          {weather.hourly.uv_index[index]},
-                          {weather.hourly.is_day[index]}
-                      </div>)}
-</div>
+{/*          <div>*/}
+{/*              {weather &&*/}
+{/*                  <div>*/}
+{/*                  <div> {weather.hourly.time.map((_item, index) =>*/}
+{/*                      <div key={index}>*/}
+{/*                          {weather.hourly.time[index]},*/}
+{/*                          {weather.hourly.temperature_2m[index]},*/}
+{/*                          {weather.hourly.relative_humidity_2m[index]},*/}
+{/*                          {weather.hourly.dew_point_2m[index]},*/}
+{/*                          {weather.hourly.apparent_temperature[index]},*/}
+{/*                          {weather.hourly.precipitation_probability[index]},*/}
+{/*                          {weather.hourly.wind_speed_10m[index]},*/}
+{/*                          {weather.hourly.wind_direction_10m[index]},*/}
+{/*                          {weather.hourly.wind_gusts_10m[index]},*/}
+{/*                          {weather.hourly.precipitation[index]},*/}
+{/*                          {weather.hourly.uv_index[index]},*/}
+{/*                          {weather.hourly.is_day[index]}*/}
+{/*                      </div>)}*/}
+{/*</div>*/}
 
 
 
-                      <div> {weather.daily.time.map((_item, index) =>
-                          <div key={index}>
-                              {weather.daily.time}
-                              {weather.daily.temperature_2m_min}
-                              {weather.daily.temperature_2m_max}
-                              {weather.daily.sunrise}
-                              {weather.daily.uv_index_max}
-                              {weather.daily.precipitation_sum}
-                              {weather.daily.precipitation_hours}
-                              {weather.daily.precipitation_probability_max}
-                              {weather.daily.apparent_temperature_max}
-                              {weather.daily.apparent_temperature_min}
-                              {weather.daily.wind_speed_10m_max}
-                          </div>
-                      )}
+{/*                      <div> {weather.daily.time.map((_item, index) =>*/}
+{/*                          <div key={index}>*/}
+{/*                              {weather.daily.time}*/}
+{/*                              {weather.daily.temperature_2m_min}*/}
+{/*                              {weather.daily.temperature_2m_max}*/}
+{/*                              {weather.daily.sunrise}*/}
+{/*                              {weather.daily.uv_index_max}*/}
+{/*                              {weather.daily.precipitation_sum}*/}
+{/*                              {weather.daily.precipitation_hours}*/}
+{/*                              {weather.daily.precipitation_probability_max}*/}
+{/*                              {weather.daily.apparent_temperature_max}*/}
+{/*                              {weather.daily.apparent_temperature_min}*/}
+{/*                              {weather.daily.wind_speed_10m_max}*/}
+{/*                          </div>*/}
+{/*                      )}*/}
 
-                      </div>
-                      <div>{weather.timezone}</div>
-                      <div>{weather.generationtime_ms}</div>
-                      <div>{weather.utc_offset_seconds}</div>
-                      <div>{weather.timezone}</div>
-                      <div>{weather.elevation}</div>
-                      <div>{weather.current.time}</div>
-                      <div>{weather.current.interval}</div>
-                      <div>{weather.current.temperature_2m}</div>
-                      <div>{weather.current.relative_humidity_2m}</div>
-                      <div>{weather.current.apparent_temperature}</div>
-                      <div>{weather.current.is_day}</div>
-                      <div>{weather.current.wind_speed_10m}</div>
-                      <div>{weather.current.wind_direction_10m}</div>
-                      <div>{weather.current.wind_gusts_10m}</div>
-                      <div>{weather.current.precipitation}</div>
-                      <div>{weather.current.weather_code}</div>
-                  </div>}
+{/*                      </div>*/}
+{/*                      <div>{weather.timezone}</div>*/}
+{/*                      <div>{weather.generationtime_ms}</div>*/}
+{/*                      <div>{weather.utc_offset_seconds}</div>*/}
+{/*                      <div>{weather.timezone}</div>*/}
+{/*                      <div>{weather.elevation}</div>*/}
+{/*                      <div>{weather.current.time}</div>*/}
+{/*                      <div>{weather.current.interval}</div>*/}
+{/*                      <div>{weather.current.temperature_2m}</div>*/}
+{/*                      <div>{weather.current.relative_humidity_2m}</div>*/}
+{/*                      <div>{weather.current.apparent_temperature}</div>*/}
+{/*                      <div>{weather.current.is_day}</div>*/}
+{/*                      <div>{weather.current.wind_speed_10m}</div>*/}
+{/*                      <div>{weather.current.wind_direction_10m}</div>*/}
+{/*                      <div>{weather.current.wind_gusts_10m}</div>*/}
+{/*                      <div>{weather.current.precipitation}</div>*/}
+{/*                      <div>{weather.current.weather_code}</div>*/}
+{/*                  </div>}*/}
 
-              </div>
+{/*              </div>*/}
           {weather && <Card weather={weather} currPlace={currPlace}/>}
                   </>
 
