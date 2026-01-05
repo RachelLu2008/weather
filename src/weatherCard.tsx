@@ -33,6 +33,7 @@ const Card = ({weather, currPlace}:{weather: weather, currPlace:string}) => {
         hour: "numeric",
         minute: "numeric",
     }
+    const dayOptions: {day:"numeric", month:"numeric", year:"numeric"} = {day:"numeric", month:"numeric", year:"numeric"}
     return (
         <StyledWrapper>
             <div className="card">
@@ -140,26 +141,26 @@ const Card = ({weather, currPlace}:{weather: weather, currPlace:string}) => {
                     <div>
                     </div>
                     <div className="forecast">
-                        <div>
-                            <p className={"fullHourly"}
-                               style={{display: "flex"}}>{weather.hourly.time.map((_item, index) =>
-                                <div className="hourly">
-                                    <p> {new Date(weather.hourly.time[index]).toLocaleString("en-US", options)}</p>
-                                    <p>{weather.hourly.temperature_2m[index]}°F</p>
-                                    <p>humidity: {weather.hourly.relative_humidity_2m[index]}</p>
-                                    <p>dew point: {weather.hourly.dew_point_2m[index]}</p>
-                                    <p>apparent temp:{weather.hourly.apparent_temperature[index]}</p>
-                                    <p>rain probability: {weather.hourly.precipitation_probability[index]}</p>
-                                    <p>wind speed: {weather.hourly.wind_speed_10m[index]}</p>
-                                    <p>wind direction: {weather.hourly.wind_direction_10m[index]}</p>
-                                    <p>wind gusts: {weather.hourly.wind_gusts_10m[index]}</p>
-                                    <p>precipitation: {weather.hourly.precipitation[index]}</p>
-                                    <p>uv index: {weather.hourly.uv_index[index]}</p>
-                                    <div className={"separator"}></div>
-                                </div>
-                            )}
-                            </p>
-                        </div>
+                        {/*<div>*/}
+                        {/*    <p className={"fullHourly"}*/}
+                        {/*       style={{display: "flex"}}>{weather.hourly.time.map((_item, index) =>*/}
+                        {/*        <div className="hourly">*/}
+                        {/*            <p> {new Date(weather.hourly.time[index]).toLocaleString("en-US", options)}</p>*/}
+                        {/*            <p>{weather.hourly.temperature_2m[index]}°F</p>*/}
+                        {/*            <p>humidity: {weather.hourly.relative_humidity_2m[index]}</p>*/}
+                        {/*            <p>dew point: {weather.hourly.dew_point_2m[index]}</p>*/}
+                        {/*            <p>apparent temp:{weather.hourly.apparent_temperature[index]}</p>*/}
+                        {/*            <p>rain probability: {weather.hourly.precipitation_probability[index]}</p>*/}
+                        {/*            <p>wind speed: {weather.hourly.wind_speed_10m[index]}</p>*/}
+                        {/*            <p>wind direction: {weather.hourly.wind_direction_10m[index]}</p>*/}
+                        {/*            <p>wind gusts: {weather.hourly.wind_gusts_10m[index]}</p>*/}
+                        {/*            <p>precipitation: {weather.hourly.precipitation[index]}</p>*/}
+                        {/*            <p>uv index: {weather.hourly.uv_index[index]}</p>*/}
+                        {/*            <div className={"separator"}></div>*/}
+                        {/*        </div>*/}
+                        {/*    )}*/}
+                        {/*    </p>*/}
+                        {/*</div>*/}
                         <div className={"separator"}></div>
                         <div>{weather.daily.time.map((_item, index) =>
                             <div>
@@ -177,6 +178,37 @@ const Card = ({weather, currPlace}:{weather: weather, currPlace:string}) => {
                                 <p>feels like max:{weather.daily.apparent_temperature_max[index]}</p>
                                 <p>feels like min:{weather.daily.apparent_temperature_min[index]}</p>
                                 <p>max wind speed:{weather.daily.wind_speed_10m_max[index]}</p>
+                                <div className={"separator"}></div>
+
+                                <div>
+                                    {weather.hourly.time.map((item, index2) => {
+                                            return {
+                                                keep: new Date(item).toLocaleString("en-US", dayOptions) === new Date(weather.daily.time[index] + "T00:00:00").toLocaleString("en-US", dayOptions),
+                                                index: index2
+                                            }
+                                        }
+                                    ).filter((item) => item.keep).map((item) => {
+                                        const index = item.index;
+                                        return <>
+                                            <div className="hourly">
+                                                <p> {new Date(weather.hourly.time[index]).toLocaleString("en-US", options)}</p>
+                                                <p>{weather.hourly.temperature_2m[index]}°F</p>
+                                                <p>humidity: {weather.hourly.relative_humidity_2m[index]}</p>
+                                                <p>dew point: {weather.hourly.dew_point_2m[index]}</p>
+                                                <p>apparent temp:{weather.hourly.apparent_temperature[index]}</p>
+                                                <p>rain
+                                                    probability: {weather.hourly.precipitation_probability[index]}</p>
+                                                <p>wind speed: {weather.hourly.wind_speed_10m[index]}</p>
+                                                <p>wind direction: {weather.hourly.wind_direction_10m[index]}</p>
+                                                <p>wind gusts: {weather.hourly.wind_gusts_10m[index]}</p>
+                                                <p>precipitation: {weather.hourly.precipitation[index]}</p>
+                                                <p>uv index: {weather.hourly.uv_index[index]}</p>
+                                                <div className={"separator"}></div>
+                                            </div>
+                                        </>
+                                    })
+                                    }
+                                </div>
                             </div>
                         )}</div>
 
@@ -192,15 +224,16 @@ const Card = ({weather, currPlace}:{weather: weather, currPlace:string}) => {
 }
 
 const StyledWrapper = styled.div`
-    .fullHourly{
+    .fullHourly {
         margin-left: auto;
         margin-right: auto;
-        flex-wrap:wrap;
+        flex-wrap: wrap;
         margin-bottom: 5px;
     }
+
     .hourly {
-        margin-right:15px;
-        
+        margin-right: 15px;
+
     }
 
     .card {
@@ -217,22 +250,23 @@ const StyledWrapper = styled.div`
         overflow: hidden;
         overflow-y: visible;
         box-shadow: 12px 12px 0px rgba(0, 0, 0, 0.1);
-    background-color: white;
-  }
+        background-color: white;
+    }
 
-  /* Landscape section */
-  .landscape-section {
-    position: relative;
-    width: 100%;
-    height: 70%;
-    overflow: hidden;
-  }
+    /* Landscape section */
 
-  .landscape-section * {
-    position: absolute;
-  }
+    .landscape-section {
+        position: relative;
+        width: 100%;
+        height: 70%;
+        overflow: hidden;
+    }
 
-  .sky {
+    .landscape-section * {
+        position: absolute;
+    }
+
+    .sky {
     width: 100%;
     height: 100%;
     background: rgb(175, 243, 230);
