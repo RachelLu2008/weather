@@ -4,25 +4,25 @@ import type {weather} from "./Hooks.ts";
 
 function weatherCode(code: number){
     if(code == 0){
-        return "Sunny"
+        return "Sunny ☀️"
     }
     else if(code >0 && code<= 19){
-        return "Cloudy"
+        return "Cloudy ☁️"
     }
     else if(code > 20 && code <= 29){
-        return "Rain";
+        return "Rain 🌧️";
     }
     else if(code > 30 && code <= 39){
-        return "Dust Storm";
+        return "Dust Storm 💨";
     }
     else if(code > 40 && code <= 49){
-        return "Fog";
+        return "Fog 🌫️";
     }
     else if(code > 50 && code <= 59){
-        return "Drizzle";
+        return "Drizzle 🌧️";
     }
     else if(code > 60 && code <= 69){
-        return "Rain";
+        return "Rain 🌧️";
     }
     else if(code > 70 && code <= 79){
         return "Snow";
@@ -90,15 +90,15 @@ const Card = ({weather, currPlace}:{weather: weather, currPlace:string}) => {
                 <section className="content-section">
                     <div className="weather-info">
                         <div className="left-side">
-                            {/*<div className="icon">*/}
-                            {/*    <svg stroke="#000000" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">*/}
-                            {/*        <g strokeWidth={0} id="SVGRepo_bgCarrier" />*/}
-                            {/*        <g strokeLinejoin="round" strokeLinecap="round" id="SVGRepo_tracerCarrier" />*/}
-                            {/*        <g id="SVGRepo_iconCarrier">*/}
-                            {/*            <path strokeLinecap="round" strokeWidth="1.5" stroke="#ffffff" d="M22 14.3529C22 17.4717 19.4416 20 16.2857 20H11M14.381 9.02721C14.9767 8.81911 15.6178 8.70588 16.2857 8.70588C16.9404 8.70588 17.5693 8.81468 18.1551 9.01498M7.11616 11.6089C6.8475 11.5567 6.56983 11.5294 6.28571 11.5294C3.91878 11.5294 2 13.4256 2 15.7647C2 18.1038 3.91878 20 6.28571 20H7M7.11616 11.6089C6.88706 10.9978 6.7619 10.3369 6.7619 9.64706C6.7619 6.52827 9.32028 4 12.4762 4C15.4159 4 17.8371 6.19371 18.1551 9.01498M7.11616 11.6089C7.68059 11.7184 8.20528 11.9374 8.66667 12.2426M18.1551 9.01498C18.8381 9.24853 19.4623 9.60648 20 10.0614" />*/}
-                            {/*        </g>*/}
-                            {/*    </svg>*/}
-                            {/*</div>*/}
+                            <div className="icon">
+                                {/*<svg stroke="#00000" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">*/}
+                                {/*    <g strokeWidth={0} id="SVGRepo_bgCarrier" />*/}
+                                {/*    <g strokeLinejoin="round" strokeLinecap="round" id="SVGRepo_tracerCarrier" />*/}
+                                {/*    <g id="SVGRepo_iconCarrier">*/}
+                                {/*        <path strokeLinecap="round" strokeWidth="1.5" stroke="#ffffff" d="M22 14.3529C22 17.4717 19.4416 20 16.2857 20H11M14.381 9.02721C14.9767 8.81911 15.6178 8.70588 16.2857 8.70588C16.9404 8.70588 17.5693 8.81468 18.1551 9.01498M7.11616 11.6089C6.8475 11.5567 6.56983 11.5294 6.28571 11.5294C3.91878 11.5294 2 13.4256 2 15.7647C2 18.1038 3.91878 20 6.28571 20H7M7.11616 11.6089C6.88706 10.9978 6.7619 10.3369 6.7619 9.64706C6.7619 6.52827 9.32028 4 12.4762 4C15.4159 4 17.8371 6.19371 18.1551 9.01498M7.11616 11.6089C7.68059 11.7184 8.20528 11.9374 8.66667 12.2426M18.1551 9.01498C18.8381 9.24853 19.4623 9.60648 20 10.0614" />*/}
+                                {/*    </g>*/}
+                                {/*</svg>*/}
+                            </div>
                             <p>{weatherCode(weather.current.weather_code)}</p>
                         </div>
 
@@ -122,8 +122,8 @@ const Card = ({weather, currPlace}:{weather: weather, currPlace:string}) => {
                             <p>{weather.daily.time[0]}</p>
                             <p>{new Date(weather.current.time).toLocaleString("en-US", options)}</p>
                             <p className="temperature">{weather.current.temperature_2m}°F</p>
-                            <div>Humidity: {weather.current.relative_humidity_2m}</div>
 
+                            <div>Humidity: {weather.current.relative_humidity_2m}</div>
                             <div>elevation:{weather.elevation}</div>
                             <div>Interval:{weather.current.interval}</div>
                             <div>Feels Like: {weather.current.apparent_temperature}°F</div>
@@ -169,6 +169,7 @@ const Card = ({weather, currPlace}:{weather: weather, currPlace:string}) => {
                                 <p>min temp: {weather.daily.temperature_2m_min[index]}</p>
                                 <p>max temp:{weather.daily.temperature_2m_max[index]}</p>
                                 <p>sunrise: {weather.daily.sunrise[index]}</p>
+                                <p>sunset: {weather.daily.sunset[index]}</p>
                                 <p>uv index max: {weather.daily.uv_index_max[index]}</p>
                                 <p>total rain:{weather.daily.precipitation_sum[index]}</p>
                                 <p>total rain time:{weather.daily.precipitation_hours[index]}</p>
@@ -211,9 +212,10 @@ const StyledWrapper = styled.div`
         align-items: center;
         position: relative;
         width: 95%;
-        height: 4000px;
+        height: 3000px;
         border-radius: 20px;
         overflow: hidden;
+        overflow-y: visible;
         box-shadow: 12px 12px 0px rgba(0, 0, 0, 0.1);
     background-color: white;
   }

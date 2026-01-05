@@ -72,6 +72,7 @@ type hourly={
         precipitation: number[];
         uv_index: number[];
         is_day: boolean[];
+        weather_code: number[];
 }
 
 type daily={
@@ -88,6 +89,7 @@ type daily={
         apparent_temperature_min: number[];
         wind_speed_10m_max: number[];
         wind_gusts_10m_max: number[];
+        sunset:string[];
 }
 export function useWeatherLoc(long: number|null, lat:number|null){
     const [coords,setCoords]= useState<weather| null>();
